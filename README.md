@@ -32,4 +32,4 @@ node ace migration:run
 node ace db:seed
 ```
 
-If everything went as expected you should see a json list of posts heading over to http://127.0.0.1:3333/posts or http://localhost:3333/posts
+If everything went as expected you should see a json list of posts heading over to http://127.0.0.1:3333/api/posts or http://localhost:3333/api/posts

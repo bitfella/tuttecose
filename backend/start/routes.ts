@@ -20,4 +20,6 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.resource('posts', 'PostsController').apiOnly()
+Route.group(() => {
+  Route.resource('posts', 'PostsController').apiOnly()
+}).prefix('api')
