@@ -1,13 +1,20 @@
 # Select Node/Alpine image from registry
 FROM node:18.13.0-alpine
-# Runs Linux command which creates
-RUN mkdir -p /home/node/app/node_modules
-WORKDIR /home/node/app
+# Set the container working directory
+WORKDIR /usr/app/backend
+# Copy from local to container
 COPY package.json yarn.* ./
-RUN apk add --no-cache git
-COPY . /home/node/app/
-RUN chown -R node:node /home/node
+# Recursively setting user:group as owners for the target files
+RUN chown -R node:node /usr/app
+# Set cache dir through env
+ENV CACHE_DIR /usr/app/backend/.cache/
+# Install npm dependencies
 RUN yarn
+# Copy from local to container
+COPY . ./
+# Switch the user inside the Container from root to node (security best practice)
 USER node
+# Expose port 3333
 EXPOSE 3333
+# Start app
 ENTRYPOINT ["node", "ace", "serve", "--watch"]

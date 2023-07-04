@@ -7,16 +7,21 @@ services:
       context: ./backend
       dockerfile: .dockerfile
     volumes:
-    - .:/home/node/app
-    - /home/node/app/node_modules
+    - ./backend:/usr/app/backend
+    - /usr/app/backend/node_modules
     ports:
     - 3333:3333
     depends_on:
-      - db
-  db:
-    container_name: db
+      - mysql
+
+  mysql:
+    container_name: mysql
     image: mysql
     restart: always
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: tuttecose
