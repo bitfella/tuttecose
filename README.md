@@ -35,7 +35,7 @@ node ace db:seed
 then add the following line to your hosts file:
 
 ```
-127.0.0.1  tuttecose.local
+127.0.0.1  tuttecose.loc
 ```
 
-If everything went as expected you should see a json list of posts heading over to http://tuttecose/api/posts
+If everything went as expected you should see a json list of posts heading over to http://tuttecose.loc/api/posts

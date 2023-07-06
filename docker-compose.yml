@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   nginx-proxy:
-    container_name: nginxproxy
+    container_name: nginx-proxy
     image: nginxproxy/nginx-proxy
     ports:
       - "80:80"
@@ -17,13 +17,13 @@ services:
     depends_on:
       - mysql
     ports:
-    - 3333:3333
+      - 3333:3333
     environment:
-      - VIRTUAL_HOST=tuttecose.local
+      - VIRTUAL_HOST=tuttecose.loc
       - VIRTUAL_PORT=3333
     volumes:
-    - ./backend:/usr/app/backend
-    - /usr/app/backend/node_modules
+      - ./backend:/usr/app/backend
+      - /usr/app/backend/node_modules
 
   mysql:
     container_name: mysql
