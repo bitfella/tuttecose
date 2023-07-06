@@ -1,23 +1,33 @@
 version: '3.8'
 
 services:
+  nginx-proxy:
+    container_name: nginxproxy
+    image: nginxproxy/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
   backend:
     container_name: backend
     build:
       context: ./backend
       dockerfile: .dockerfile
+    depends_on:
+      - mysql
+    ports:
+    - 3333:3333
+    environment:
+      - VIRTUAL_HOST=tuttecose.local
+      - VIRTUAL_PORT=3333
     volumes:
     - ./backend:/usr/app/backend
     - /usr/app/backend/node_modules
-    ports:
-    - 3333:3333
-    depends_on:
-      - mysql
 
   mysql:
     container_name: mysql
     image: mysql
-    restart: always
     expose:
       - "3306"
     ports:
