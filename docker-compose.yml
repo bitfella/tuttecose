@@ -13,13 +13,14 @@ services:
     container_name: backend
     build:
       context: ./backend
-      dockerfile: .dockerfile
+      dockerfile: Dockerfile
     depends_on:
       - mysql
     ports:
       - 3333:3333
     environment:
       - VIRTUAL_HOST=tuttecose.loc
+      - VIRTUAL_PATH=/api
       - VIRTUAL_PORT=3333
     volumes:
       - ./backend:/usr/app/backend
@@ -37,3 +38,20 @@ services:
       MYSQL_USER: tuttecose
       MYSQL_PASSWORD: password
       MYSQL_DATABASE: tuttecose
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - 5173:5173
+    environment:
+      - VIRTUAL_HOST=tuttecose.loc
+      - VIRTUAL_PATH=/
+      - VIRTUAL_PORT=5173
+    volumes:
+      - ./frontend:/usr/app/frontend
+      - /usr/app/frontend/node_modules

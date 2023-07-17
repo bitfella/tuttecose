@@ -7,13 +7,23 @@ Tuttecose is an attempt to create an example of full stack, containerized web ap
 - [**Docker**](https://www.docker.com/)
 - [**AdonisJS**](https://adonisjs.com/)
 - [**Typescript**](https://www.typescriptlang.org/)
+- [**Vite**](https://vitejs.dev/)
 - [**React**](https://react.dev/)
+- [**Tailwind CSS**](https://tailwindcss.com/)
 
 ## Requirements
 
 [Docker](https://www.docker.com/) is required to make Tuttecose work.
 
 ## Getting started
+
+Add the following line to your hosts file:
+
+```
+127.0.0.1  tuttecose.loc
+```
+
+then start your Docker daemon and follow these installation steps:
 
 ```bash
 #clone the project
@@ -32,10 +42,4 @@ node ace migration:run
 node ace db:seed
 ```
 
-then add the following line to your hosts file:
-
-```
-127.0.0.1  tuttecose.loc
-```
-
-If everything went as expected you should see a json list of posts heading over to http://tuttecose.loc/api/posts
+If everything went as expected you should see a json list of posts heading over to http://tuttecose.loc/api/posts and an UI populated with aforementioned data browsing http://tuttecose.loc

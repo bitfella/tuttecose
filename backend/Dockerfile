@@ -5,7 +5,7 @@ WORKDIR /usr/app/backend
 # Copy from local to container
 COPY package.json yarn.* ./
 # Recursively setting user:group as owners for the target files
-RUN chown -R node:node /usr/app
+RUN chown -R node:node /usr/app/backend
 # Set cache dir through env
 ENV CACHE_DIR /usr/app/backend/.cache/
 # Install npm dependencies
@@ -17,4 +17,4 @@ USER node
 # Expose port 3333
 EXPOSE 3333
 # Start app
-ENTRYPOINT ["node", "ace", "serve", "--watch"]
+ENTRYPOINT ["yarn", "dev"]
