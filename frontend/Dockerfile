@@ -12,7 +12,7 @@ RUN yarn
 COPY . ./
 # Switch the user inside the Container from root to node (security best practice)
 USER node
-# Expose port 3333
+# Expose port 5173
 EXPOSE 5173
 # Start app
 ENTRYPOINT ["yarn", "dev"]
