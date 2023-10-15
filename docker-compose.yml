@@ -38,6 +38,8 @@ services:
       MYSQL_USER: tuttecose
       MYSQL_PASSWORD: password
       MYSQL_DATABASE: tuttecose
+    volumes:
+      - mysql:/var/lib/mysql
 
   frontend:
     container_name: frontend
@@ -55,3 +57,6 @@ services:
     volumes:
       - ./frontend:/usr/app/frontend
       - /usr/app/frontend/node_modules
+
+volumes:
+  mysql:
