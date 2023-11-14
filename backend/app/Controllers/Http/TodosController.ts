@@ -1,9 +1,9 @@
-import Post from 'App/Models/Post'
+import Todo from 'App/Models/Todo'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
-export default class PostsController {
+export default class TodosController {
   public async index({ response }) {
-    const posts = await Post.all()
+    const posts = await Todo.all()
 
     return response.ok(posts)
   }
@@ -15,20 +15,20 @@ export default class PostsController {
     })
 
     const payload: any = await request.validate({ schema: postSchema })
-    const post: Post = await Post.create(payload)
+    const todo: Todo = await Todo.create(payload)
 
-    return response.ok(post)
+    return response.ok(todo)
   }
 
   public async show({ params, response }) {
     const { id }: { id: Number } = params
 
-    const post: any = await Post.find(id)
-    if (!post) {
-      return response.notFound({ message: 'Post not found' })
+    const todo: any = await Todo.find(id)
+    if (!todo) {
+      return response.notFound({ message: 'Todo not found' })
     }
 
-    return response.ok(post)
+    return response.ok(todo)
   }
 
   public async update({ request, params, response }) {
@@ -41,29 +41,29 @@ export default class PostsController {
 
     const { id }: { id: Number } = params
 
-    const post: any = await Post.find(id)
-    if (!post) {
-      return response.notFound({ message: 'Post not found' })
+    const todo: any = await Todo.find(id)
+    if (!todo) {
+      return response.notFound({ message: 'Todo not found' })
     }
 
-    post.title = payload.title
-    post.content = payload.content
+    todo.title = payload.title
+    todo.content = payload.content
 
-    await post.save()
+    await todo.save()
 
-    return response.ok(post)
+    return response.ok(todo)
   }
 
   public async destroy({ params, response }) {
     const { id }: { id: Number } = params
 
-    const post: any = await Post.find(id)
-    if (!post) {
-      return response.notFound({ message: 'Post not found' })
+    const todo: any = await Todo.find(id)
+    if (!todo) {
+      return response.notFound({ message: 'Todo not found' })
     }
 
-    await post.delete()
+    await todo.delete()
 
-    return response.ok({ message: 'Post deleted successfully.' })
+    return response.ok({ message: 'Todo deleted successfully.' })
   }
 }

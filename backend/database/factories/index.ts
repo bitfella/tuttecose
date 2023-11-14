@@ -1,7 +1,7 @@
 import Factory from '@ioc:Adonis/Lucid/Factory'
-import Post from 'App/Models/Post'
+import Todo from 'App/Models/Todo'
 
-export const PostFactory = Factory.define(Post, ({ faker }) => {
+export const TodoFactory = Factory.define(Todo, ({ faker }) => {
   return {
     title: faker.lorem.words(6),
     content: faker.lorem.lines(2),

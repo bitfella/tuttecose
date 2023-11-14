@@ -8,7 +8,7 @@ const TodoList = (): JSX.Element | null => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await (
-        await fetch('http://tuttecose.loc/api/posts')
+        await fetch('http://tuttecose.loc/api/todos')
       ).json();
 
       setData(data);
