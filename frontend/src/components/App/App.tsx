@@ -1,8 +1,14 @@
-import PostList from "../../components/PostList";
+import Header from '../../components/Header';
+import TodoList from '../../components/TodoList';
 
 function App() {
   return (
-    <PostList />
+    <>
+      <Header />
+      <main className='pt-20'>
+        <TodoList />
+      </main>
+    </>
   );
 }
 
