@@ -11,7 +11,7 @@ export default class TodosController {
   public async store({ request, response }) {
     const postSchema = schema.create({
       title: schema.string({ trim: true }, [rules.maxLength(255)]),
-      content: schema.string({ escape: true }, [rules.maxLength(1000)]),
+      description: schema.string({ escape: true }, [rules.maxLength(1000)]),
     })
 
     const payload: any = await request.validate({ schema: postSchema })
@@ -34,7 +34,7 @@ export default class TodosController {
   public async update({ request, params, response }) {
     const postSchema = schema.create({
       title: schema.string({ trim: true }, [rules.maxLength(255)]),
-      content: schema.string({ escape: true }, [rules.maxLength(1000)]),
+      description: schema.string({ escape: true }, [rules.maxLength(1000)]),
     })
 
     const payload: any = await request.validate({ schema: postSchema })
@@ -47,7 +47,7 @@ export default class TodosController {
     }
 
     todo.title = payload.title
-    todo.content = payload.content
+    todo.description = payload.description
 
     await todo.save()
 

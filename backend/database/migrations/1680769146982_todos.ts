@@ -7,8 +7,8 @@ export default class Todos extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('title', 255)
-      table.text('content', 'long')
-      table.specificType('status', 'tinyint(1)').unsigned().defaultTo(1);
+      table.text('description', 'long')
+      table.specificType('status', 'tinyint(1)').unsigned().defaultTo(1)
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
