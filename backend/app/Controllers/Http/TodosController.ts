@@ -3,9 +3,9 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class TodosController {
   public async index({ response }) {
-    const posts = await Todo.all()
+    const todos = await Todo.all()
 
-    return response.ok(posts)
+    return response.ok(todos)
   }
 
   public async store({ request, response }) {
