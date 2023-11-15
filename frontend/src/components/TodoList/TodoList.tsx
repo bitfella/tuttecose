@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 
-import Todo, { ITodo } from '../Todo'
+import Todo from '../Todo';
+import api from '../../services';
+import { ITodo } from '../../shared/ts';
 
 const TodoList = (): JSX.Element | null => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<ITodo[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await (
-        await fetch('http://tuttecose.loc/api/todos')
-      ).json();
-
-      setData(data);
+      try {
+        const data = await api.getTodos<ITodo[]>();
+        setData(data);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     fetchData();
@@ -20,12 +23,12 @@ const TodoList = (): JSX.Element | null => {
   if (!data) return null;
 
   return (
-    <ul className='px-3'>
-      {
-        data.map((item: ITodo) => <Todo key={item.id} {...item} />)
-      }
+    <ul className="px-3">
+      {data.map((item: ITodo) => (
+        <Todo key={item.id} {...item} />
+      ))}
     </ul>
-  )
-}
+  );
+};
 
 export default TodoList;

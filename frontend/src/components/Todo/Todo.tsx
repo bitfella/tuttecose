@@ -1,16 +1,54 @@
-import { ITodo } from '.';
+import { useEffect, useState } from 'react';
 
-const Todo = ({ id, title, description, status }: ITodo): JSX.Element => {
-  const todoId = `todo_${id}`
+import api from '../../services';
+import { ITodo } from '../../shared/ts';
+
+const Todo = ({ id, title, status }: ITodo): JSX.Element | null => {
+  const [isDone, setIsDone] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const todoId = `todo_${id}`;
+  const handleOptimisticIsDoneChange = async () => {
+    setIsDone(!isDone);
+    try {
+      const data = await api.patchTodo<ITodo>(id, Number(!isDone));
+      setIsDone(!!data.status);
+    } catch (error) {
+      setIsDone(isDone);
+      console.error(error);
+    }
+  };
+  const handleOptimisticDelete = async () => {
+    setIsDeleted(true);
+    try {
+      await api.deleteTodo(id);
+      setIsDeleted(true);
+    } catch (error) {
+      setIsDeleted(false);
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    setIsDone(!!status);
+  }, [status]);
+
+  if (isDeleted) {
+    return null;
+  }
 
   return (
-    <li className='mb-4'>
-      <input type='checkbox' name={todoId} id={todoId} />
-      <h3>{title}</h3>
-      <p>{description}</p>
-      <span>{status}</span>
+    <li className="mb-4">
+      <input
+        type="checkbox"
+        checked={isDone}
+        id={todoId}
+        name={todoId}
+        onChange={handleOptimisticIsDoneChange}
+      />
+      <label htmlFor={todoId}>{title}</label>
+      <button onClick={handleOptimisticDelete}>delete</button>
     </li>
-  )
+  );
 };
 
 export default Todo;
