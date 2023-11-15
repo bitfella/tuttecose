@@ -9,12 +9,12 @@ export default class TodosController {
   }
 
   public async store({ request, response }) {
-    const postSchema = schema.create({
+    const todoSchema = schema.create({
       title: schema.string({ trim: true }, [rules.maxLength(255)]),
-      description: schema.string({ escape: true }, [rules.maxLength(1000)]),
+      description: schema.string.optional({ escape: true }, [rules.maxLength(1000)]),
+      status: schema.number.optional([rules.unsigned(), rules.range(0, 1)]),
     })
-
-    const payload: any = await request.validate({ schema: postSchema })
+    const payload: any = await request.validate({ schema: todoSchema })
     const todo: Todo = await Todo.create(payload)
 
     return response.ok(todo)
@@ -22,8 +22,8 @@ export default class TodosController {
 
   public async show({ params, response }) {
     const { id }: { id: Number } = params
-
     const todo: any = await Todo.find(id)
+
     if (!todo) {
       return response.notFound({ message: 'Todo not found' })
     }
@@ -32,22 +32,22 @@ export default class TodosController {
   }
 
   public async update({ request, params, response }) {
-    const postSchema = schema.create({
-      title: schema.string({ trim: true }, [rules.maxLength(255)]),
-      description: schema.string({ escape: true }, [rules.maxLength(1000)]),
+    const todoSchema = schema.create({
+      title: schema.string.optional({ trim: true }, [rules.maxLength(255)]),
+      description: schema.string.optional({ escape: true }, [rules.maxLength(1000)]),
+      status: schema.number.optional([rules.unsigned(), rules.range(0, 1)]),
     })
-
-    const payload: any = await request.validate({ schema: postSchema })
-
+    const payload: any = await request.validate({ schema: todoSchema })
     const { id }: { id: Number } = params
-
     const todo: any = await Todo.find(id)
+
     if (!todo) {
       return response.notFound({ message: 'Todo not found' })
     }
 
     todo.title = payload.title
     todo.description = payload.description
+    todo.status = payload.status
 
     await todo.save()
 
@@ -56,8 +56,8 @@ export default class TodosController {
 
   public async destroy({ params, response }) {
     const { id }: { id: Number } = params
-
     const todo: any = await Todo.find(id)
+
     if (!todo) {
       return response.notFound({ message: 'Todo not found' })
     }
