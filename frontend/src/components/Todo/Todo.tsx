@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 
+import { ITodoComponent } from './Todo.types';
 import api from '../../services';
 import { ITodo } from '../../shared/ts';
 
-const Todo = ({ id, title, status }: ITodo): JSX.Element | null => {
+const Todo = ({ id, title, status, onTodoChange }: ITodoComponent ): JSX.Element | null => {
   const [isDone, setIsDone] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const todoId = `todo_${id}`;
@@ -12,6 +13,7 @@ const Todo = ({ id, title, status }: ITodo): JSX.Element | null => {
     try {
       const data = await api.patchTodo<ITodo>(id, Number(!isDone));
       setIsDone(!!data.status);
+      onTodoChange();
     } catch (error) {
       setIsDone(isDone);
       console.error(error);
@@ -22,6 +24,7 @@ const Todo = ({ id, title, status }: ITodo): JSX.Element | null => {
     try {
       await api.deleteTodo(id);
       setIsDeleted(true);
+      onTodoChange();
     } catch (error) {
       setIsDeleted(false);
       console.error(error);
@@ -90,13 +93,13 @@ const Todo = ({ id, title, status }: ITodo): JSX.Element | null => {
       >
         {title}
       </label>
-{/*       <button
+      <button
         className='appearance-none ml-10 flex'
         title='delete todo'
         onClick={handleOptimisticDelete}
       >
         [delete]
-      </button> */}
+      </button>
     </li>
   );
 };

@@ -1,13 +1,19 @@
 import Todo from '../Todo';
 import { ITodo } from '../../shared/ts';
 
-const TodoList = ({ data }: { data: ITodo[]}): JSX.Element | null => {
+const TodoList = ({
+  data,
+  onTodoChange,
+}: {
+  data: ITodo[];
+  onTodoChange: () => void;
+}): JSX.Element | null => {
   if (!data.length) return null;
 
   return (
     <ul className='max-w-2xl'>
       {data.map((item: ITodo) => (
-        <Todo key={item.id} {...item} />
+        <Todo key={item.id} {...item} onTodoChange={onTodoChange} />
       ))}
     </ul>
   );

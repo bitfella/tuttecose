@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import api from '../../services';
 
-const AddTodo = ({ onTodoAdded }: { onTodoAdded: () => void }): JSX.Element => {
+const AddTodo = ({ onTodoAdd }: { onTodoAdd: () => void }): JSX.Element => {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleAddTodo = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     const title = (event.target as HTMLInputElement).value.trim();
@@ -10,7 +10,7 @@ const AddTodo = ({ onTodoAdded }: { onTodoAdded: () => void }): JSX.Element => {
     if (event.code === 'Enter' && title) {
       try {
         await api.addTodo(title);
-        onTodoAdded();
+        onTodoAdd();
         if (inputRef.current) inputRef.current.value = '';
       } catch (error) {
         console.error(error);

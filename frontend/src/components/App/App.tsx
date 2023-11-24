@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import AddTodo from '../../components/AddTodo';
+import ProgressBar from '../../components/ProgressBar';
 import TodoList from '../../components/TodoList';
 import api from '../../services';
 import { ITodo } from '../../shared/ts';
@@ -31,8 +32,12 @@ const App = (): JSX.Element => {
       py-16
       font-mono
     `}>
-      <TodoList data={data} />
-      <AddTodo onTodoAdded={fetchData} />
+      <ProgressBar
+        completed={data.filter((item) => item.status === 1).length}
+        total={data.length}
+      />
+      <TodoList data={data} onTodoChange={fetchData} />
+      <AddTodo onTodoAdd={fetchData} />
     </main>
   );
 }
