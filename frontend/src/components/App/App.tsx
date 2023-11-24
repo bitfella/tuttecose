@@ -1,11 +1,9 @@
-import Header from '../../components/Header';
 import TodoList from '../../components/TodoList';
 
 function App() {
   return (
     <>
-      <Header />
-      <main className='pt-20'>
+      <main className='font-mono'>
         <TodoList />
       </main>
     </>
