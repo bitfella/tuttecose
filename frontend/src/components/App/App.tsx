@@ -1,3 +1,4 @@
+import AddTodo from '../../components/AddTodo';
 import TodoList from '../../components/TodoList';
 
 const App = (): JSX.Element => {
@@ -14,6 +15,7 @@ const App = (): JSX.Element => {
         font-mono
       `}>
         <TodoList />
+        <AddTodo />
       </main>
     </>
   );

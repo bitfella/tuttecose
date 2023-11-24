@@ -7,7 +7,22 @@ const throwError = (response: { status: number; statusText: string }) => {
 
 const api = {
   getTodos: async <T>(): Promise<T> => {
-    const response = await fetch(`http://tuttecose.loc/api/todos/`);
+    const response = await fetch(`http://tuttecose.loc/api/todos/`, {
+      method: 'GET',
+    });
+    if (!response.ok) throwError(response);
+    const data = (await response.json()) as Promise<T>;
+
+    return data;
+  },
+  addTodo: async <T>(title: string): Promise<T> => {
+    const response = await fetch(`http://tuttecose.loc/api/todos/`, {
+      method: 'POST',
+      body: JSON.stringify({
+        title,
+      }),
+      headers,
+    });
     if (!response.ok) throwError(response);
     const data = (await response.json()) as Promise<T>;
 
