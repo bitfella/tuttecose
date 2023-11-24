@@ -23,7 +23,7 @@ const TodoList = (): JSX.Element | null => {
   if (!data) return null;
 
   return (
-    <ul className="px-3">
+    <ul className='px-3'>
       {data.map((item: ITodo) => (
         <Todo key={item.id} {...item} />
       ))}
