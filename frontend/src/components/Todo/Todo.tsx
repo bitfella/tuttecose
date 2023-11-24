@@ -37,7 +37,7 @@ const Todo = ({ id, title, status }: ITodo): JSX.Element | null => {
   }
 
   return (
-    <li className='mb-4'>
+    <li className='[&:not(:last-child)]:mb-4'>
       <input
         type='checkbox'
         className={`
@@ -54,8 +54,9 @@ const Todo = ({ id, title, status }: ITodo): JSX.Element | null => {
       <label
         className={`
           relative
-          pt-1
-          pl-12
+          pl-10
+          inline-flex
+          overflow-hidden
           cursor-pointer
           font-bold
           text-lg
@@ -63,8 +64,8 @@ const Todo = ({ id, title, status }: ITodo): JSX.Element | null => {
           before:top-0
           before:left-0
           before:content
-          before:w-8
-          before:h-8
+          before:w-[28px]
+          before:h-[28px]
           before:rounded-full
           before:border-[3px]
           before:border-black
@@ -75,8 +76,8 @@ const Todo = ({ id, title, status }: ITodo): JSX.Element | null => {
           after:top-[10px]
           after:left-2
           after:content
-          after:w-[15px]
-          after:h-[8px]
+          after:w-[13px]
+          after:h-[7px]
           after:border-black
           after:border-b-[3px]
           after:border-l-[3px]
@@ -89,13 +90,13 @@ const Todo = ({ id, title, status }: ITodo): JSX.Element | null => {
       >
         {title}
       </label>
-      <button
-        className='ml-2'
+{/*       <button
+        className='appearance-none ml-10 flex'
         title='delete todo'
         onClick={handleOptimisticDelete}
       >
-        [x]
-      </button>
+        [delete]
+      </button> */}
     </li>
   );
 };
