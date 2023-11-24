@@ -1,3 +1,6 @@
+const headers = {
+  'Content-type': 'application/json; charset=UTF-8',
+};
 const throwError = (response: { status: number; statusText: string }) => {
   throw new Error(`${response.status} ${response.statusText}`);
 };
@@ -14,11 +17,9 @@ const api = {
     const response = await fetch(`http://tuttecose.loc/api/todos/${id}`, {
       method: 'PATCH',
       body: JSON.stringify({
-        status: status,
+        status,
       }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
+      headers,
     });
     if (!response.ok) throwError(response);
     const data = (await response.json()) as Promise<T>;
@@ -28,9 +29,7 @@ const api = {
   deleteTodo: async <T>(id: number): Promise<T> => {
     const response = await fetch(`http://tuttecose.loc/api/todos/${id}`, {
       method: 'DELETE',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
+      headers,
     });
     if (!response.ok) throwError(response);
     const data = (await response.json()) as Promise<T>;
