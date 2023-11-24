@@ -1,26 +1,8 @@
-import { useEffect, useState } from 'react';
-
 import Todo from '../Todo';
-import api from '../../services';
 import { ITodo } from '../../shared/ts';
 
-const TodoList = (): JSX.Element | null => {
-  const [data, setData] = useState<ITodo[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await api.getTodos<ITodo[]>();
-        setData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (!data) return null;
+const TodoList = ({ data }: { data: ITodo[]}): JSX.Element | null => {
+  if (!data.length) return null;
 
   return (
     <ul className='max-w-2xl'>
