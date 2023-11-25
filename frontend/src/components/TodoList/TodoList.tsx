@@ -7,7 +7,7 @@ const TodoList = ({
 }: {
   data: ITodo[];
   onTodoChange: () => void;
-}): JSX.Element | null => {
+}): JSX.Element => {
   if (!data.length) {
     return <span>no todos so far!</span>;
   }
