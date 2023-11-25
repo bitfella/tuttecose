@@ -22,7 +22,8 @@ const App = (): JSX.Element => {
   }, []);
 
   return (
-    <main className={`
+    <main
+      className={`
       flex
       flex-col
       items-center
@@ -31,11 +32,14 @@ const App = (): JSX.Element => {
       px-8
       py-16
       font-mono
-    `}>
-      <ProgressBar
-        completed={data.filter((item) => item.status === 1).length}
-        total={data.length}
-      />
+    `}
+    >
+      {data.length >= 1 && (
+        <ProgressBar
+          completed={data.filter((item) => item.status === 1).length}
+          total={data.length}
+        />
+      )}
       <TodoList data={data} onTodoChange={fetchData} />
       <AddTodo onTodoAdd={fetchData} />
     </main>
