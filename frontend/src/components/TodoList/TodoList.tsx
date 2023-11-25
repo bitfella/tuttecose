@@ -8,7 +8,9 @@ const TodoList = ({
   data: ITodo[];
   onTodoChange: () => void;
 }): JSX.Element | null => {
-  if (!data.length) return null;
+  if (!data.length) {
+    return <span>no todos so far!</span>;
+  }
 
   return (
     <ul className='max-w-2xl'>
