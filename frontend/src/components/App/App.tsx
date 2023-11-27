@@ -29,6 +29,8 @@ const App = (): JSX.Element => {
       items-center
       justify-center
       min-h-[100dvh]
+      bg-white
+      dark:bg-black
       px-8
       py-16
       font-mono

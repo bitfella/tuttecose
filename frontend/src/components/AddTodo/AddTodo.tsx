@@ -29,21 +29,27 @@ const AddTodo = ({ onTodoAdd }: { onTodoAdd: () => void }): JSX.Element => {
       justify-center
       py-4
       bg-white
+      dark:bg-black
     `}>
       <input
         type='text'
         className={`
           appearance-none
-          min-w-[300px]
+          min-w-[350px]
           py-1
-          border-b-2
-          border-gray-400
+          bg-white
+          dark:bg-black
           border-transparent
+          border-b-2
+          border-b-gray-400
+          text-black
+          dark:text-white
           placeholder:text-gray-400
           focus:outline-none
-          focus:border-black
+          focus:border-b-black
+          dark:focus:border-b-white
         `}
-        placeholder='type a new todo and press enter'
+        placeholder='type here a new todo and press enter'
         ref={inputRef}
         onKeyDown={handleAddTodo}
       />

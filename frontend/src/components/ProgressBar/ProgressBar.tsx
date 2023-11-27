@@ -17,12 +17,19 @@ const ProgressBar = ({
         right-0
         z-10
         bg-white
-        text-gray-500
+        dark:bg-black
+        text-gray-400
         text-sm
       `}
     >
       <span
-        className='flex h-3 bg-black transition-all ease-in-out'
+        className={`
+          flex h-3
+          bg-black
+          dark:bg-white
+          transition-all
+          ease-in-out
+        `}
         style={{ width: `${percent}%` }}
       ></span>
       <span className='inline-flex p-4'>

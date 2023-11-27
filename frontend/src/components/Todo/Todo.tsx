@@ -45,7 +45,7 @@ const Todo = ({ id, title, status, onTodoChange }: ITodoComponent ): JSX.Element
         type='checkbox'
         className={`
           appearance-none
-          [&:checked+label]:text-gray-500
+          [&:checked+label]:text-gray-400
           [&:checked+label]:line-through
           [&:checked+label]:after:opacity-100
         `}
@@ -62,6 +62,8 @@ const Todo = ({ id, title, status, onTodoChange }: ITodoComponent ): JSX.Element
           overflow-hidden
           cursor-pointer
           font-bold
+          text-black
+          dark:text-white
           text-lg
           before:absolute
           before:top-0
@@ -72,6 +74,7 @@ const Todo = ({ id, title, status, onTodoChange }: ITodoComponent ): JSX.Element
           before:rounded-full
           before:border-[3px]
           before:border-black
+          dark:before:border-white
           before:font-bold
           before:text-2xl
           before:text-center
@@ -82,6 +85,7 @@ const Todo = ({ id, title, status, onTodoChange }: ITodoComponent ): JSX.Element
           after:w-[13px]
           after:h-[7px]
           after:border-black
+          dark:after:border-white
           after:border-b-[3px]
           after:border-l-[3px]
           after:-rotate-45
@@ -94,7 +98,13 @@ const Todo = ({ id, title, status, onTodoChange }: ITodoComponent ): JSX.Element
         {title}
       </label>
       <button
-        className='appearance-none ml-10 flex'
+        className={`
+          appearance-none
+          ml-10
+          flex
+          text-black
+          dark:text-white
+        `}
         title='delete todo'
         onClick={handleOptimisticDelete}
       >
