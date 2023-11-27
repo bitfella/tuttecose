@@ -7,10 +7,6 @@ const ProgressBar = ({
 }): JSX.Element | null => {
   const percent = Math.round((completed * 100) / total) || 0;
 
-  if (!completed || !total) {
-    return null;
-  }
-
   return (
     <div
       aria-hidden='true'

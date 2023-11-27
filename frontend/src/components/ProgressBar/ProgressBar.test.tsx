@@ -4,16 +4,6 @@ import { render } from '@testing-library/react';
 import ProgressBar from './ProgressBar';
 
 describe('ProgressBar component', () => {
-  it('should render properly with expected props', () => {
-    const mockProps = {
-      completed: 15,
-      total: 30,
-    };
-    const wrapper = render(<ProgressBar {...mockProps} />);
-
-    expect(wrapper).toBeTruthy();
-  });
-
   it('should render a proper progress bar with expected props', () => {
     const mockProps = {
       completed: 10,
