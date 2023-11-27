@@ -4,7 +4,12 @@ import { ITodoComponent } from './Todo.types';
 import api from '../../services';
 import { ITodo } from '../../shared/ts';
 
-const Todo = ({ id, title, status, onTodoChange }: ITodoComponent ): JSX.Element | null => {
+const Todo = ({
+  id,
+  title,
+  status,
+  onTodoChange,
+}: ITodoComponent): JSX.Element | null => {
   const [isDone, setIsDone] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const todoId = `todo_${id}`;
@@ -45,71 +50,71 @@ const Todo = ({ id, title, status, onTodoChange }: ITodoComponent ): JSX.Element
         type='checkbox'
         className={`
           appearance-none
-          [&:checked+label]:text-gray-400
-          [&:checked+label]:line-through
-          [&:checked+label]:after:opacity-100
+          [&:checked+span>label]:text-gray-400
+          [&:checked+span>label]:line-through
+          [&:checked+span>label]:after:opacity-100
         `}
         checked={isDone}
         id={todoId}
         name={todoId}
         onChange={handleOptimisticIsDoneChange}
       />
-      <label
-        className={`
-          relative
-          pl-10
-          inline-flex
-          overflow-hidden
-          cursor-pointer
-          font-bold
-          text-black
-          dark:text-white
-          text-lg
-          before:absolute
-          before:top-0
-          before:left-0
-          before:content
-          before:w-[28px]
-          before:h-[28px]
-          before:rounded-full
-          before:border-[3px]
-          before:border-black
-          dark:before:border-white
-          before:font-bold
-          before:text-2xl
-          before:text-center
-          after:absolute
-          after:top-[10px]
-          after:left-2
-          after:content
-          after:w-[13px]
-          after:h-[7px]
-          after:border-black
-          dark:after:border-white
-          after:border-b-[3px]
-          after:border-l-[3px]
-          after:-rotate-45
-          after:opacity-0
-          after:transition-opacity
-          after:ease-in-out
-        `}
-        htmlFor={todoId}
-      >
-        {title}
-      </label>
-      <button
-        className={`
-          appearance-none
-          ml-10
-          flex
-          text-black
-          dark:text-white
-        `}
-        title='delete todo'
-        onClick={handleOptimisticDelete}
-      >
-        [delete]
-      </button>
+      <span className={`inline-flex pl-10`}>
+        <label
+          className={`
+            relative
+            cursor-pointer
+            font-bold
+            text-black
+            dark:text-white
+            text-lg
+            before:absolute
+            before:top-0
+            before:-left-[40px]
+            before:content
+            before:w-[28px]
+            before:h-[28px]
+            before:rounded-full
+            before:border-[3px]
+            before:border-black
+            dark:before:border-white
+            before:font-bold
+            before:text-2xl
+            before:text-center
+            after:absolute
+            after:top-[10px]
+            after:-left-8
+            after:content
+            after:w-[13px]
+            after:h-[7px]
+            after:border-black
+            dark:after:border-white
+            after:border-b-[3px]
+            after:border-l-[3px]
+            after:-rotate-45
+            after:opacity-0
+            after:transition-opacity
+            after:ease-in-out
+          `}
+          htmlFor={todoId}
+        >
+          {title}
+          <button
+            className={`
+              appearance-none
+              inline-flex
+              ml-2
+              text-black
+              dark:text-white
+              before:content-['+']
+              before:rotate-45
+              before:hover:text-red-600
+            `}
+            title='delete todo'
+            onClick={handleOptimisticDelete}
+          />
+        </label>
+      </span>
     </li>
   );
 };
