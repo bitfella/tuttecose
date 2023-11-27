@@ -8,7 +8,7 @@ export default class Todos extends BaseSchema {
       table.increments('id')
       table.string('title', 255)
       table.text('description', 'long')
-      table.specificType('status', 'tinyint(1)').unsigned().defaultTo(1)
+      table.specificType('status', 'tinyint(1)').unsigned().defaultTo(0)
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
