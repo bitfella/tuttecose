@@ -19,7 +19,17 @@ const AddTodo = ({ onTodoAdd }: { onTodoAdd: () => void }): JSX.Element => {
   };
 
   return (
-    <nav className='flex justify-center w-full mt-16'>
+    <nav className={`
+      fixed
+      left-0
+      right-0
+      bottom-0
+      z-10
+      flex
+      justify-center
+      py-4
+      bg-white
+    `}>
       <input
         type='text'
         className={`
