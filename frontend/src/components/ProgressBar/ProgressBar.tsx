@@ -4,8 +4,12 @@ const ProgressBar = ({
 }: {
   completed: number;
   total: number;
-}): JSX.Element => {
+}): JSX.Element | null => {
   const percent = Math.round((completed * 100) / total) || 0;
+
+  if (!completed || !total) {
+    return null;
+  }
 
   return (
     <div
@@ -31,8 +35,9 @@ const ProgressBar = ({
           ease-in-out
         `}
         style={{ width: `${percent}%` }}
-      ></span>
-      <span className='inline-flex p-4'>
+        data-testid='ProgressBar-Gfx'
+      />
+      <span className='inline-flex p-4' data-testid='ProgressBar-Text'>
         completed: {percent}% ({completed}/{total})
       </span>
     </div>
