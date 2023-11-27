@@ -13,7 +13,7 @@ const TodoList = ({
   }
 
   return (
-    <ul className='max-w-2xl'>
+    <ul className='max-w-2xl min-w-[70%]'>
       {data.map((item: ITodo) => (
         <Todo key={item.id} {...item} onTodoChange={onTodoChange} />
       ))}
