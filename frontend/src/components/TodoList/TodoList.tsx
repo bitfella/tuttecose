@@ -9,7 +9,7 @@ const TodoList = ({
   onTodoChange: () => void;
 }): JSX.Element => {
   if (!data.length) {
-    return <span>no todos so far!</span>;
+    return <span className='text-black dark:text-white'>no todos so far!</span>;
   }
 
   return (
